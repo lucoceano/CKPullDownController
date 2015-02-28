@@ -1,4 +1,6 @@
-CKPullDownController is a copu of [CKPullDownController](https://github.com/matej/CKPullDownController) with few bug fix and improviments.
+CKPullDownController
+========
+CKPullDownController is a copy of [CKPullDownController](https://github.com/matej/CKPullDownController) with few bug fix and improviments.
 
 CKPullDownController accepts two view controllers, which it presents one above the other. The front view controller is configured to accept a pull interaction which it utilizes to show or hide back view controller. 
 
