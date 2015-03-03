@@ -137,7 +137,7 @@ static CGFloat const kDefaultCloseDragOffsetPercentage = .05;
 	_closeDragOffset = kDefaultCloseDragOffset;
 	_openDragOffsetPercentage = kDefaultOpenDragOffsetPercentage;
 	_closeDragOffsetPercentage = kDefaultCloseDragOffsetPercentage;
-	_backgroundView = [[CKPullDownControllerBackgroundView alloc] initPullDownController:self];
+	_backgroundView = _frontController.view;
 	[self addChildViewController:_frontController];
 }
 
@@ -166,7 +166,7 @@ static CGFloat const kDefaultCloseDragOffsetPercentage = .05;
 */
 - (void)viewDidLayoutSubviews
 {
-	if(IOS_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
+	if (IOS_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
 		[UIView animateWithDuration:.35 animations:^{
 			if (self.open) {
 				[self setOpen:self.open animated:NO];
@@ -185,10 +185,12 @@ static CGFloat const kDefaultCloseDragOffsetPercentage = .05;
 
 #pragma mark - ScrollView Delegate
 
+
 - (void)setScrollViewDelegate:(id <UIScrollViewDelegate>)delegate
 {
 	((UIScrollView *) self.scrollViewController.view).delegate = delegate;
 }
+
 
 #pragma mark - Layout
 
@@ -644,50 +646,6 @@ static CGFloat const kDefaultCloseDragOffsetPercentage = .05;
 
 @end
 
-@implementation CKPullDownControllerBackgroundView
-
-#pragma mark - Lifecycle
-
-
-- (id)initPullDownController:(CKPullDownController *)pullDownController
-{
-	self = [super init];
-	if (self) {
-		self.frame = [UIScreen mainScreen].bounds;
-		[self addSubview:pullDownController.frontController.view];
-		self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-		self.dropShadowVisible = YES;
-	}
-	return self;
-}
-
-
-#pragma mark - Shadow
-
-
-- (void)setDropShadowVisible:(BOOL)dropShadowVisible
-{
-	if (_dropShadowVisible != dropShadowVisible) {
-		CALayer *layer = self.layer;
-		layer.shadowOffset = CGSizeMake(0, -5);
-		layer.shadowRadius = 5;
-		layer.shadowOpacity = dropShadowVisible ? .2f : 0.f;
-		[self setNeedsLayout];
-		_dropShadowVisible = dropShadowVisible;
-	}
-}
-
-
-#pragma mark - Layout
-
-
-- (void)layoutSubviews
-{
-	[super layoutSubviews];
-	self.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.bounds].CGPath;
-}
-
-@end
 
 @implementation CKPullDownControllerContainerView
 
@@ -695,8 +653,8 @@ static CGFloat const kDefaultCloseDragOffsetPercentage = .05;
 {
 	UIScrollView *scrollView = [self.pullDownController scrollView];
 	if (scrollView) {
-		CGPoint pointInScrollVeiw = [scrollView convertPoint:point fromView:self];
-		if (pointInScrollVeiw.y <= 0.f) {
+		CGPoint pointInScrollView = [scrollView convertPoint:point fromView:self];
+		if (pointInScrollView.y <= 0.f) {
 			UIView *targetView = self.pullDownController.backController.view;
 			return [targetView hitTest:[self convertPoint:point toView:targetView] withEvent:event];
 		}

@@ -27,7 +27,7 @@
 
 - (UIViewController *)setUpViewControllerHierarchy {
 	MBImagesViewController *front = [[MBImagesViewController alloc] init];
-    front.view.backgroundColor = [UIColor whiteColor];
+    front.view.backgroundColor = [UIColor colorWithWhite:.85 alpha:1];
 	MBSettingsController *back = [[MBSettingsController alloc] init];
     back.view.backgroundColor = [UIColor whiteColor];
 	CKPullDownController *pullDownController = [[CKPullDownController alloc] initWithFrontController:front backController:back];

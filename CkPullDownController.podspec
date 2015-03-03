@@ -1,9 +1,9 @@
 Pod::Spec.new do |s|
   s.name         = "CKPullDownController"
-  s.version      = "1.0"
+  s.version      = "1.1"
   s.summary      = "An iOS container view controller for pullable scroll view interfaces."
   s.description  = <<-DESC
-  					CKPullDownController is a copu of [MBPullDownController](https://github.com/matej/MBPullDownController) with few bug fix and improviments.
+  					CKPullDownController is a copy of [MBPullDownController](https://github.com/matej/MBPullDownController) with few bug fix and improviments.
                     CKPullDownController accepts two view controllers, which it presents one above the other.
                     The front view controller is configured to accept a pull interaction which it utilizes to show or hide back view controller.
                    DESC

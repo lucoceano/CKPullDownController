@@ -158,14 +158,3 @@
 @property (nonatomic, readonly) CKPullDownController *pullDownController;
 
 @end
-
-
-@interface CKPullDownControllerBackgroundView : UIView
-
-/**
-* Enables or disables the preset MBPullDownControllerBackgroundView shadow.
-* Defaults to YES.
-*/
-@property (nonatomic, assign) BOOL dropShadowVisible;
-- (id)initPullDownController:(CKPullDownController *)pullDownController;
-@end
